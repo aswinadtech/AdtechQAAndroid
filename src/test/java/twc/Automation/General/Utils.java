@@ -44,7 +44,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.twc.ios.app.general.ReadExcelValues;
+
 
 //import com.twc.ios.app.general.TestBase;
 //import com.twc.ios.app.general.Utils;
@@ -8507,5 +8507,33 @@ public static void get_amazon_bid_values_from_gampadCalls(String feedCall, Strin
 
 		}
 
+	}
+	
+	/**
+	 * Verifies whether lotame call contains 'seg' parameter
+	 * @param excelName
+	 * @param sheetName
+	 * @param expectedSegment
+	 * @throws Exception
+	 */
+	public static void verify_Lotame_Call_Segment_Parameter(String excelName, String sheetName, String expectedSegment)
+			throws Exception {
+		String[][] capabilitydata = read_excel_data.exceldataread("Capabilities");
+		DeviceStatus device_status = new DeviceStatus();
+		int Cap = device_status.Device_Status();
+		String host = capabilitydata[2][Cap];
+		//String path = ReadExcelValues.data[4][Cap];
+		String path = expectedSegment;
+		boolean flag = verifyAPICallWithHostandPath(host, path);
+		if (flag) {
+			System.out.println(host+ " call is present in Charles session and contains segment: "+expectedSegment.split("=")[1]);
+			logStep(host+ " call is present in Charles session and contains segment: "+expectedSegment.split("=")[1]);
+
+		} else {
+			System.out.println("Either "+host +" call is not present in Charles session or "+host +" call not contains the segment "+expectedSegment.split("=")[1]);
+			logStep("Either "+host +" call is not present in Charles session or "+host +" call not contains the segment "+expectedSegment.split("=")[1]);
+			Assert.fail("Either "+host +" call is not present in Charles session or "+host +" call not contains the segment "+expectedSegment.split("=")[1]);
+		}
+		
 	}
 }

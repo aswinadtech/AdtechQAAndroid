@@ -6,6 +6,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
+import io.qameta.allure.Step;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -32,7 +33,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
 
 
 import twc.Automation.ReadDataFromFile.read_excel_data;
@@ -474,10 +474,10 @@ public static void stopAppium() throws InterruptedException {
 	   public static void LaunchAppWithFullReset() throws Exception{
      	
    //  FTLScreens ftlScreens;
-     	/*killADB();
+     	killADB();
      		AppiumServerStop();
      	AppiumServerStart();
-     			startAppium();*/
+     			startAppium();
      			
      			DeviceStatus device_status = new DeviceStatus();
      			int Cap = device_status.Device_Status();
@@ -539,6 +539,84 @@ public static void stopAppium() throws InterruptedException {
      			//}
      		}
      	
+     	
+     	
+     	
+    	@SuppressWarnings("rawtypes")
+ 	   public static void launchtheApp_forLocalization(String ResetType, String region, boolean includeRegion,
+ 				String language, boolean includelanguage) throws Exception{
+      	
+    //  FTLScreens ftlScreens;
+      	killADB();
+      		AppiumServerStop();
+      	AppiumServerStart();
+      			startAppium();
+      			
+      			DeviceStatus device_status = new DeviceStatus();
+      			int Cap = device_status.Device_Status();
+      			
+//      		try {  		
+      				String[][] capabilitydata = read_excel_data.exceldataread("Capabilities");
+      				DesiredCapabilities capabilities = new DesiredCapabilities();
+      				
+      				/* --- Start Android Device Capabilities --- */
+      				if(Cap == 2){
+      				//	capabilities.setCapability(capabilitydata[1][0], capabilitydata[1][Cap]);
+      					capabilities.setCapability(capabilitydata[2][0], capabilitydata[2][Cap]); 
+      					capabilities.setCapability(capabilitydata[3][0], capabilitydata[3][Cap]);
+      					capabilities.setCapability(capabilitydata[7][0], capabilitydata[7][Cap]); 
+      					capabilities.setCapability(capabilitydata[9][0], capabilitydata[9][Cap]);
+      				//	capabilities.setCapability("udid","277a9e7c891c7ece");
+      					capabilities.setCapability(capabilitydata[12][0],capabilitydata[12][Cap]);
+      				//	capabilities.setCapability("noReset","true");
+      		capabilities.setCapability("appActivity","com.weather.Weather.app.SplashScreenActivity");
+      			//	capabilities.setCapability("appActivity","com.weather.android.daybreak.MainActivity");
+      				capabilities.setCapability("automationName","UiAutomator2");
+      			//	capabilities.setCapability("enabled","chromedriver_autodownload");
+      				//	System.out.println("app : "+capabilitydata[10][Cap]);
+      					capabilities.setCapability(capabilitydata[13][0],capabilitydata[13][Cap]);
+      					//capabilities.setCapability(capabilitydata[14][0],capabilitydata[14][Cap]);
+      					if (includeRegion) {
+      						capabilities.setCapability("locale", region);
+      					}
+      					if (includelanguage) {
+      						capabilities.setCapability("language", language);
+      					}
+
+      					Thread.sleep(10000);
+      					String AppiumUrl = capabilitydata[15][Cap];
+      				//	System.out.println("Appium Url  is :: "+AppiumUrl);
+      					Ad = new AndroidDriver(new URL(AppiumUrl), capabilities);
+      				//	Ad = new AppiumDriver(new URL(capabilitydata[15][Cap]), capabilities);
+      					Thread.sleep(15000);
+      					
+      					/* ---End Android Device Capabilities --- */
+      	    			Ad.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+      	    		//	ftlScreens = new FTLScreens(Ad);
+      	    			//ftlScreens.handle_Unwanted_Popups();
+      	    			//####added ths to handle allow button		
+      	    			 clickONTerms();
+      	    		attachScreen();
+      	    			clickONNext();
+      	    			attachScreen();
+      	    			// scrollforclickngIunderstand();
+      	    		    ClickonIUnderstand();
+      	    		   attachScreen();
+      	        		clickOnAllow();		
+      	        		attachScreen();
+      	        		Clickonclosebutton();
+      	        		attachScreen();
+      	    			Thread.sleep(10000);
+      	    			System.out.println("Capabilities have been launched  with fullreset ");
+      				}
+      			
+      			
+      		//	} 
+      			
+      			//catch (Exception e) {
+      				//System.out.println("Unable To Launch The Appium Capabilities");
+      			//}
+      		}
     	/**
     	 * Appium Autostart
     	 * @throws IOException
@@ -2190,7 +2268,10 @@ public static void getIpaddress() {
 
 }
 
-
+@Step("Verify Tapability of Sticky Test Ad On Radar Nav Tab")
+public void verifyTapabilityOfTestAdOnRadarNavTab() {
+		
+}
 /*public static void settingProxyEnable(String type,String ipAddress,String portNumber) throws Exception{
 		//clicking connection option on settings app
 	clickRequiredEleemntononSettingsapp("Connections");	

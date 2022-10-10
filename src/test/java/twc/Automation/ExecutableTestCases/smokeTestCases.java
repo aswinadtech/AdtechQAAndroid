@@ -1906,7 +1906,35 @@ public void Smoke_Test_Verifying_newdailydetails_day1adcall_FTL() throws Excepti
 			        	System.out.println("==============================================");
 			        	System.out.println("****** Verify Enable Preconditions for WeatherFX API Parameters test started");
 			        	logStep("Verify Enable Preconditions for WeatherFX API Parameters test started");
-			        	
+			        	Thread.sleep(30000);
+			        	 Ad.resetApp();
+			        	 Thread.sleep(30000);
+			        	 AppiumFunctions.handleunwantedpopups();
+			        	proxy.clearCharlesSession();
+			        AppiumFunctions.Kill_launch();
+			        	 Thread.sleep(100000);
+			        	Thread.sleep(100000);
+			         AppiumFunctions.enter_requiredLocation("30124");
+			        	Thread.sleep(5000);
+			        	proxy.clearCharlesSession();
+			        	AppiumFunctions.Kill_launch();
+			        	Thread.sleep(2000);
+			        	proxy.clearCharlesSession();
+			        	AppiumFunctions.Kill_launch();
+			        	Thread.sleep(10000);
+			        	// navigate to Hourly tab
+			        	AppFunctions.click_hourly_element();
+			        	Thread.sleep(2000);
+			        	// navigate to Daily tab
+			        	Functions.clickdailydetails();
+			        	Thread.sleep(2000);
+			        	// navigate to Radar tab
+			        	AppiumFunctions.clickOnMaps();
+			        	Thread.sleep(5000);
+			        	CharlesFunctions.archive_folder("Charles");
+			        	Thread.sleep(5000);
+			        	proxy.getXml();
+			        	CharlesFunctions.createXMLFileForCharlesSessionFile();
 			        	
 
 			        }
