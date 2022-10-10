@@ -59,8 +59,8 @@ import twc.Automation.General.Utils;
 public class smokeTestCases extends  TwcAndroidBaseTest {
 //	protected String email;
 	public static String CurrentWifiName=null;
-	
-	private static final String CONFIG_FILE_PATH = "charles_common.config";
+	private static final String CONFIG_FILE_PATH = "enableUSA.config";
+	//private static final String CONFIG_FILE_PATH = "charles_common.config";
 	private static final String BN_SEVERE1_CONFIG_FILE_PATH = "BNSevere1charles_common.config";
 	private static final String BN_SEVERE2_CONFIG_FILE_PATH = "BNSevere2charles_common.config";
 	// public static CharlesProxy proxy;
@@ -72,7 +72,7 @@ public class smokeTestCases extends  TwcAndroidBaseTest {
 	
 	@BeforeClass(alwaysRun = true)
     public void beforeClass() throws Exception {	
-	this.configFile = this.charlesGeneralConfigFile(CONFIG_FILE_PATH);
+		this.configFile = this.rewriteRuleToEnableUSA(CONFIG_FILE_PATH);
 	proxy = new CharlesProxy("localhost", 8333, CONFIG_FILE_PATH);
 	proxy.startCharlesProxyWithUI();
 	proxy.disableRewriting();
