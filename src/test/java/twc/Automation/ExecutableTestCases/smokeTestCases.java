@@ -84,7 +84,7 @@ public class smokeTestCases extends  TwcAndroidBaseTest {
 	AppiumFunctions.Appium_Autostart();
 	AppiumFunctions.LaunchAppWithFullReset();
 	Thread.sleep(90000);
-	AppFunctions.gettingApkVersion_UPSX() ;
+	//AppFunctions.gettingApkVersion_UPSX() ;
 
 }
 	
