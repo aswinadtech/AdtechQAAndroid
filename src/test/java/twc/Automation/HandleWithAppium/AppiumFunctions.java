@@ -474,10 +474,10 @@ public static void stopAppium() throws InterruptedException {
 	   public static void LaunchAppWithFullReset() throws Exception{
      	
    //  FTLScreens ftlScreens;
-     	killADB();
+     	/*killADB();
      		AppiumServerStop();
      	AppiumServerStart();
-     			startAppium();
+     			startAppium();*/
      			
      			DeviceStatus device_status = new DeviceStatus();
      			int Cap = device_status.Device_Status();
