@@ -75,7 +75,7 @@ public class smokeTestCases extends  TwcAndroidBaseTest {
 		this.configFile = this.rewriteRuleToEnableUSA(CONFIG_FILE_PATH);
 	proxy = new CharlesProxy("localhost", 8333, CONFIG_FILE_PATH);
 	proxy.startCharlesProxyWithUI();
-	proxy.disableRewriting();
+	//proxy.disableRewriting();
     proxy.stopRecording();
 	proxy.disableMapLocal();
 	proxy.startRecording();
