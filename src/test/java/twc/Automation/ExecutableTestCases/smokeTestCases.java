@@ -73,13 +73,14 @@ public class smokeTestCases extends  TwcAndroidBaseTest {
 	@BeforeClass(alwaysRun = true)
     public void beforeClass() throws Exception {	
 		this.configFile = this.rewriteRuleToEnableUSA(CONFIG_FILE_PATH);
-	proxy = new CharlesProxy("localhost", 8333, CONFIG_FILE_PATH);
-	proxy.startCharlesProxyWithUI();
+	 this.proxy = new CharlesProxy("localhost", 8333, CONFIG_FILE_PATH);
+	 this.proxy.startCharlesProxyWithUI();
 	//proxy.disableRewriting();
-    proxy.stopRecording();
-	proxy.disableMapLocal();
-	proxy.startRecording();
-	proxy.clearCharlesSession();
+	    this.proxy.enableRewriting();
+     this.proxy.stopRecording();
+	 this.proxy.disableMapLocal();
+	 this.proxy.startRecording();
+	 this.proxy.clearCharlesSession();
 	AppiumFunctions.Appium_Autostart();
 	AppiumFunctions.LaunchAppWithFullReset();
 	Thread.sleep(90000);
