@@ -2630,11 +2630,13 @@ public static void ScreenShot(String Adtype,String ScreenType) throws Exception{
 public static void enter_requiredLocation(String location) throws Exception {
 	new WebDriverWait(Ad, Functions.maxTimeout).until(ExpectedConditions.elementToBeClickable(Ad.findElementByAccessibilityId("Search")));	
 Ad.findElementByAccessibilityId("Search").click();
+Thread.sleep(5000);
 new WebDriverWait(Ad, Functions.maxTimeout).until(ExpectedConditions.visibilityOfElementLocated(By.id("com.weather.Weather:id/search_text")));	
 Ad.findElementById("com.weather.Weather:id/search_text").sendKeys(location);
+Thread.sleep(5000);
 new WebDriverWait(Ad, Functions.maxTimeout).until(ExpectedConditions.elementToBeClickable(Ad.findElementById("com.weather.Weather:id/title")));	
 List<WebElement> allLocations=Ad.findElementsById("com.weather.Weather:id/title");
-
+Thread.sleep(5000);
 allLocations.get(0).getText();
 System.out.println(allLocations.size());
 
@@ -2644,9 +2646,9 @@ for(int i=0;i<=allLocations.size();i++) {
 	if(location.contains("New York City")) {
 		//System.out.println(loc.getText());
 		if(allLocations.get(i).getText().contains("New York City")) {
-			Thread.sleep(6000);
+			Thread.sleep(15000);
 			allLocations.get(i).click();
-		Thread.sleep(6000);
+		Thread.sleep(15000);
 		break;
 		}
 	}
@@ -2661,6 +2663,17 @@ for(int i=0;i<=allLocations.size();i++) {
 		break;
 		}
 	}
+	
+	if(location.contains("30124")) {
+		//System.out.println(loc.getText());
+		if(allLocations.get(i).getText().contains("Cave Spring")) {
+			Thread.sleep(6000);
+			allLocations.get(i).click();
+			Thread.sleep(6000);
+		break;
+		}
+	}
+	
 	
 	if(location.contains("10005")) {
 		//System.out.println(loc.getText());

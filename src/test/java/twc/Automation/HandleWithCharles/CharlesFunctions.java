@@ -700,10 +700,10 @@ public static void app_download_from_firebaselink() throws InterruptedException,
 			// File("/Users/narasimhanukala/git/ads-automation/ios_Smoke_Automation/ArchivedSessions/charles202002212053.chlsx");
 			// File outfile = new
 			// File("/Users/narasimhanukala/git/ads-automation/ios_Smoke_Automation/charles/myoutputFile.xml");
-			outfile = new File(System.getProperty("user.dir") + "/myoutputFile.xml");
+			CharlesFunctions.outfile = new File(System.getProperty("user.dir") + "/myoutputFile.xml");
 
 			instream = new FileInputStream(infile);
-			outstream = new FileOutputStream(outfile);
+			outstream = new FileOutputStream(CharlesFunctions.outfile);
 
 			byte[] buffer = new byte[1024];
 

@@ -59,8 +59,8 @@ import twc.Automation.General.Utils;
 public class smokeTestCases extends  TwcAndroidBaseTest {
 //	protected String email;
 	public static String CurrentWifiName=null;
-	
-	private static final String CONFIG_FILE_PATH = "charles_common.config";
+	private static final String CONFIG_FILE_PATH = "enableUSA.config";
+	//private static final String CONFIG_FILE_PATH = "charles_common.config";
 	private static final String BN_SEVERE1_CONFIG_FILE_PATH = "BNSevere1charles_common.config";
 	private static final String BN_SEVERE2_CONFIG_FILE_PATH = "BNSevere2charles_common.config";
 	// public static CharlesProxy proxy;
@@ -72,10 +72,11 @@ public class smokeTestCases extends  TwcAndroidBaseTest {
 	
 	@BeforeClass(alwaysRun = true)
     public void beforeClass() throws Exception {	
-	this.configFile = this.charlesGeneralConfigFile(CONFIG_FILE_PATH);
+		this.configFile = this.rewriteRuleToEnableUSA(CONFIG_FILE_PATH);
 	proxy = new CharlesProxy("localhost", 8333, CONFIG_FILE_PATH);
 	proxy.startCharlesProxyWithUI();
-	proxy.disableRewriting();
+	//proxy.disableRewriting();
+	this.proxy.enableRewriting();
     proxy.stopRecording();
 	proxy.disableMapLocal();
 	proxy.startRecording();
@@ -83,6 +84,7 @@ public class smokeTestCases extends  TwcAndroidBaseTest {
 	AppiumFunctions.Appium_Autostart();
 	AppiumFunctions.LaunchAppWithFullReset();
 	Thread.sleep(90000);
+	AppFunctions.enter_requiredLocation("New York City");
 	AppFunctions.gettingApkVersion_UPSX() ;
 
 }
@@ -101,7 +103,7 @@ public class smokeTestCases extends  TwcAndroidBaseTest {
 				"================= verifying iu value for home screen marquee test case started =========================");	
 		System.out.println("going to all feed cards and details pages");
 		logStep("going to all feed cards and details pages");	 		
-	//	AppiumFunctions.SwipeUp_Counter_feedcards(35);
+	AppiumFunctions.SwipeUp_Counter_feedcards(35);
 			CharlesFunctions.archive_folder("Charles");
 		this.proxy.getXml();
 		CharlesFunctions.createXMLFileForCharlesSessionFile();
@@ -290,8 +292,22 @@ public class smokeTestCases extends  TwcAndroidBaseTest {
 	@Description("Verifying  hourly detailpage al call on FTL")
 	public void Smoke_Test_Verify_hourly_detailpage_adcall_FTL() throws Exception {
 		System.out.println("================= Verifying hourly_detailpage_adcall_iu test case  Started =========================");
-		
-	   
+
+		proxy.clearCharlesSession();
+		   AppFunctions.click_hourly_element();
+		   attachScreen();
+		   Thread.sleep(10000);
+			AppFunctions.Swipe();
+			AppFunctions.Swipe();
+			AppFunctions.Swipe();
+			AppFunctions.Swipe();
+			AppFunctions.Swipe();
+			AppFunctions.Swipe();
+			Thread.sleep(10000);
+			Thread.sleep(10000);
+			CharlesFunctions.archive_folder("Charles");
+			this.proxy.getXml();
+		CharlesFunctions.createXMLFileForCharlesSessionFile();	   
       Utils.verifyPubadCal("Smoke", "Hourly");
 		
 		System.out.println("================= Verifying hourly_detailpage_adcall_iu  test case  End =========================");
@@ -378,8 +394,16 @@ System.out.println(
 public void Smoke_Test_Verifying_newdailydetails_day1adcall_FTL() throws Exception {
 	System.out.println(
 			"================= Verifying new daily details day1 ad call tescase Started =========================");
-
-	
+	proxy.clearCharlesSession();	
+	Functions.clickdailydetails();
+	attachScreen();
+	//Functions.closeInterstailads();
+//	Functions.clickongotit();
+	Thread.sleep(15000);
+	Functions.verifyingdailydetrailsday1today7();
+	CharlesFunctions.archive_folder("Charles");
+	this.proxy.getXml();
+	CharlesFunctions.createXMLFileForCharlesSessionFile();	
 	Utils.verifyPubadCal("Smoke", "DailyDetails");
 		
 	System.out.println(
@@ -458,6 +482,14 @@ public void Smoke_Test_Verifying_newdailydetails_day1adcall_FTL() throws Excepti
 			     System.out.println(
 			     	"================= Verifying new daily details day2 ad call test case Started=========================");
 			    
+			     CharlesFunctions.archive_folder("Charles");
+			     proxy.clearCharlesSession();
+			     Functions.clickonday2();
+			     attachScreen();
+			     Thread.sleep(10000);
+			     Functions.verifyingdailydetrailsday1today7();
+			     this.proxy.getXml();
+			     CharlesFunctions.createXMLFileForCharlesSessionFile();
 			     Utils.verifyPubadCal("Smoke", "DailyDetails");
 
 			     System.out.println(
@@ -485,8 +517,15 @@ public void Smoke_Test_Verifying_newdailydetails_day1adcall_FTL() throws Excepti
 			     public void Smoke_Test_Verifying_newdailydetails_day3adcall_FTL() throws Exception {
 			     System.out.println(
 			     	"================= Verifying new daily details day3 ad call test case Started =========================");
-
-			     
+			     CharlesFunctions.archive_folder("Charles");
+			     proxy.clearCharlesSession();
+			     //Functions.finding_newDailyBidadcall_day2();
+			     Functions.clickonday3();
+			     attachScreen();
+			     Thread.sleep(10000);
+			     Functions.verifyingdailydetrailsday1today7();
+			     this.proxy.getXml();
+			     CharlesFunctions.createXMLFileForCharlesSessionFile();
 			     Utils.verifyPubadCal("Smoke", "DailyDetails");
 			     System.out.println(
 			     	"================= Verifying new daily details day3 ad call test case End =========================");
@@ -510,7 +549,15 @@ public void Smoke_Test_Verifying_newdailydetails_day1adcall_FTL() throws Excepti
 			     public void Smoke_Test_Verifying_newdailydetails_day4adcall_FTL() throws Exception {
 			     System.out.println(
 			     	"================= Verifying new daily details day4 ad call tescase Started =========================");
-			    
+			     CharlesFunctions.archive_folder("Charles");
+			     proxy.clearCharlesSession();
+			     //Functions.finding_newDailyBidadcall_day2();
+			     Functions.clickonday4();
+			     Thread.sleep(10000);
+			     attachScreen();
+			     Functions.verifyingdailydetrailsday1today7();
+			     this.proxy.getXml();
+			     CharlesFunctions.createXMLFileForCharlesSessionFile();
 			     Utils.verifyPubadCal("Smoke", "DailyDetails");
 
 			     System.out.println(
@@ -537,8 +584,17 @@ public void Smoke_Test_Verifying_newdailydetails_day1adcall_FTL() throws Excepti
 			     public void Smoke_Test_Verifying_newdailydetails_day5adcall_FTL() throws Exception {
 			     System.out.println(
 			     	"================= Verifying new daily details day5 ad call tescase Started =========================");
-			    
-			    Utils.verifyPubadCal("Smoke", "DailyDetails");
+			     CharlesFunctions.archive_folder("Charles");
+			     proxy.clearCharlesSession();
+			     //Functions.finding_newDailyBidadcall_day2();
+			     Functions.clickonday5();
+			     Thread.sleep(10000);
+			     attachScreen();
+			     Functions.verifyingdailydetrailsday1today7();
+			     this.proxy.getXml();
+			     CharlesFunctions.createXMLFileForCharlesSessionFile();
+			     Utils.verifyPubadCal("Smoke", "DailyDetails");
+
 
 			     System.out.println(
 			     	"================= Verifying new daily details day5 ad call tescase End =========================");
@@ -563,7 +619,16 @@ public void Smoke_Test_Verifying_newdailydetails_day1adcall_FTL() throws Excepti
 			     	System.out.println(
 			     			"================= Verifying new daily details day6 ad call tescase Started =========================");
 			     	
-			    Utils.verifyPubadCal("Smoke", "DailyDetails");
+			    	CharlesFunctions.archive_folder("Charles");
+			    	proxy.clearCharlesSession();
+//			    	Functions.finding_newDailyBidadcall_day2();
+			    	Functions.clickonday6();
+			    	Thread.sleep(10000);
+			    	attachScreen();
+			    	Functions.verifyingdailydetrailsday1today7();
+			    	this.proxy.getXml();
+			    CharlesFunctions.createXMLFileForCharlesSessionFile();
+			    Utils.verifyPubadCal("Smoke", "DailyDetails");;
 			     		
 			     	System.out.println(
 			     			"================= Verifying new daily details day6 ad call tescase End =========================");
@@ -591,7 +656,16 @@ public void Smoke_Test_Verifying_newdailydetails_day1adcall_FTL() throws Excepti
 			     	System.out.println(
 			     			"================= Verifying new daily details day7 ad call tescase Started =========================");
 			     
-			     Utils.verifyPubadCal("Smoke", "DailyDetails");
+			     	CharlesFunctions.archive_folder("Charles");
+			    	proxy.clearCharlesSession();
+//			    	Functions.finding_newDailyBidadcall_day2();
+			    	Functions.clickonday7();
+			    	Thread.sleep(10000);
+			    	attachScreen();
+			    	Functions.verifyingdailydetrailsday1today7();
+			    	this.proxy.getXml();
+			    CharlesFunctions.createXMLFileForCharlesSessionFile();
+			    Utils.verifyPubadCal("Smoke", "DailyDetails");;
 			     	
 			     	System.out.println(
 			     			"================= Verifying new daily details day7 ad call tescase End =========================");
@@ -850,7 +924,14 @@ public void Smoke_Test_Verifying_newdailydetails_day1adcall_FTL() throws Excepti
     public void Validate_PreRollVideo_cmsid_Custom_param() throws Exception {
     System.out.println("==============================================");
     System.out.println("****** Validating cmsid custom parameter of Video call");
-   
+    proxy.clearCharlesSession();
+    Ad.resetApp();
+    Thread.sleep(80000);
+    AppiumFunctions.handleunwantedpopups();
+    AppiumFunctions.clickOnVideoElementdynamic();
+    Thread.sleep(80000);
+    this.proxy.getXml();
+    CharlesFunctions.createXMLFileForCharlesSessionFile();
   Utils.validate_Noncustom_param_val_of_gampad("Smoke", "PreRollVideo", "cmsid", "NotNull");
 
     }
@@ -963,7 +1044,16 @@ public void Smoke_Test_Verifying_newdailydetails_day1adcall_FTL() throws Excepti
     	System.out.println("==============================================");
     	System.out.println("****** Validating plat custom parameter of Marquee call");
     	logStep("Validating plat custom parameter of Marquee call ");
-    	
+    	logStep("Validating plat custom parameter of Marquee call ");
+    	proxy.clearCharlesSession();
+    	AppiumFunctions.Kill_launch();
+    	Thread.sleep(30000);
+    	Thread.sleep(100000);
+            AppiumFunctions.SwipeUp_Counter(5);
+     	   AppFunctions.click_hourly_element();
+            Thread.sleep(30000);
+            this.proxy.getXml();	
+    	CharlesFunctions.createXMLFileForCharlesSessionFile();
     	Utils.validate_Noncustom_param_val_of_gampad("Smoke", "Marquee", "plat", "wx_droid_phone");
 
     }
@@ -1896,265 +1986,7 @@ public void Smoke_Test_Verifying_newdailydetails_day1adcall_FTL() throws Excepti
 			        }
 			      
 			        
-			        
-			        /*
-			         * Enable Preconditions for WeatherFX API Parameters validation
-			         */
-			        @Test(priority = 3001, enabled = true)
-			        @Description("Verify Enable Preconditions For WeatherFX API Parameters")
-			        public void Verify_enable_preConditions_for_WeatherFx_API_Parameters() throws Exception {
-			        	System.out.println("==============================================");
-			        	System.out.println("****** Verify Enable Preconditions for WeatherFX API Parameters test started");
-			        	logStep("Verify Enable Preconditions for WeatherFX API Parameters test started");
-			        	Thread.sleep(30000);
-			        	 Ad.resetApp();
-			        	 Thread.sleep(30000);
-			        	 AppiumFunctions.handleunwantedpopups();
-			        	proxy.clearCharlesSession();
-			        AppiumFunctions.Kill_launch();
-			        	 Thread.sleep(100000);
-			        	Thread.sleep(100000);
-			         AppiumFunctions.enter_requiredLocation("30124");
-			        	Thread.sleep(5000);
-			        	proxy.clearCharlesSession();
-			        	AppiumFunctions.Kill_launch();
-			        	Thread.sleep(2000);
-			        	proxy.clearCharlesSession();
-			        	AppiumFunctions.Kill_launch();
-			        	Thread.sleep(10000);
-			        	// navigate to Hourly tab
-			        	AppFunctions.click_hourly_element();
-			        	Thread.sleep(2000);
-			        	// navigate to Daily tab
-			        	Functions.clickdailydetails();
-			        	Thread.sleep(2000);
-			        	// navigate to Radar tab
-			        	AppiumFunctions.clickOnMaps();
-			        	Thread.sleep(5000);
-			        	CharlesFunctions.archive_folder("Charles");
-			        	Thread.sleep(5000);
-			        	proxy.getXml();
-			        	CharlesFunctions.createXMLFileForCharlesSessionFile();
-			        	
-
-			        }
-
-
-
-			        /*
-			         * This method validates wfxtg custom parameter of Hourly details call
-			         */
-			        @Test(priority = 3002, enabled = true)
-			        @Description("Validating 'wfxtg' custom parameter of Hourly details call ")
-			        public void Validate_HourlyDetails_wfxtg_Custom_param() throws Exception {
-			        	System.out.println("==============================================");
-			        	System.out.println("****** Validating wfxtg custom parameter of Hourly details call");
-			        	logStep("Validating wfxtg custom parameter of Hourly details call ");
-			        	//CharlesFunctions.createXMLFileForCharlesSessionFile();
-			        	Utils.validate_custom_param_val_of_gampad_with_zip("Hourly", "wfxtg", "30124");
-
-			        }
-
-			        /*
-			         * This method validates wfxtg custom parameter of Daily details call
-			         */
-			        @Test(priority = 3003, enabled = true)
-			        @Description("Validating 'wfxtg' custom parameter of Daily details call ")
-			        public void Validate_DailyDetails_wfxtg_Custom_param() throws Exception {
-			        	System.out.println("==============================================");
-			        	System.out.println("****** Validating wfxtg custom parameter of Daily details call");
-			        	logStep("Validating wfxtg custom parameter of Daily details call ");
-			        	Utils.validate_custom_param_val_of_gampad_with_zip("Daily(10day)", "wfxtg", "30124");
-
-			        }
-
-			        /*
-			         * This method validates wfxtg custom parameter of Map details call
-			         */
-			        @Test(priority = 3004, enabled = true)
-			        @Description("Validating 'wfxtg' custom parameter of Map details call ")
-			        public void Validate_MapDetails_wfxtg_Custom_param() throws Exception {
-			        	System.out.println("==============================================");
-			        	System.out.println("****** Validating wfxtg custom parameter of Map details call");
-			        	logStep("Validating wfxtg custom parameter of Map details call ");
-			        	Utils.validate_custom_param_val_of_gampad_with_zip("Map", "wfxtg", "30124");
-
-			        }
-
-			        /*
-			         * This method validates cxtg custom parameter of Hourly details call
-			         */
-			        @Test(priority = 3006, enabled = true)
-			        @Description("Validating 'cxtg' custom parameter of Hourly details call ")
-			        public void Validate_HourlyDetails_cxtg_Custom_param() throws Exception {
-			        	System.out.println("==============================================");
-			        	System.out.println("****** Validating cxtg custom parameter of Hourly details call");
-			        	logStep("Validating cxtg custom parameter of Hourly details call ");
-			        	//CharlesFunctions.createXMLFileForCharlesSessionFile();
-			        	Utils.validate_custom_param_val_of_gampad_with_zip("Hourly", "cxtg", "30124");
-
-			        }
-
-			        /*
-			         * This method validates cxtg custom parameter of Daily details call
-			         */
-			        @Test(priority = 3008, enabled = true)
-			        @Description("Validating 'cxtg' custom parameter of Daily details call ")
-			        public void Validate_DailyDetails_cxtg_Custom_param() throws Exception {
-			        	System.out.println("==============================================");
-			        	System.out.println("****** Validating cxtg custom parameter of Daily details call");
-			        	logStep("Validating cxtg custom parameter of Daily details call ");
-			        	Utils.validate_custom_param_val_of_gampad_with_zip("Daily(10day)", "cxtg", "30124");
-
-			        }
-
-			        /*
-			         * This method validates wfxtg custom parameter of Map details call
-			         */
-			        @Test(priority = 3010, enabled = true)
-			        @Description("Validating 'cxtg' custom parameter of Map details call ")
-			        public void Validate_MapDetails_cxtg_Custom_param() throws Exception {
-			        	System.out.println("==============================================");
-			        	System.out.println("****** Validating cxtg custom parameter of Map details call");
-			        	logStep("Validating cxtg custom parameter of Map details call ");
-			        	Utils.validate_custom_param_val_of_gampad_with_zip("Map", "cxtg", "30124");
-
-			        }
-
-
-
-
-			        /*
-			         * This method validates zcs custom parameter of Hourly details call
-			         */
-			        @Test(priority = 3012, enabled = true)
-			        @Description("Validating 'zcs' custom parameter of Hourly details call ")
-			        public void Validate_HourlyDetails_zcs_Custom_param() throws Exception {
-			        	System.out.println("==============================================");
-			        	System.out.println("****** Validating zcs custom parameter of Hourly details call");
-			        	logStep("Validating zcs custom parameter of Hourly details call ");
-			        	Utils.validate_custom_param_val_of_gampad_with_zip( "Hourly", "zcs", "30124");
-
-			        }
-
-			        /*
-			         * This method validates zcs custom parameter of Daily details call
-			         */
-			        @Test(priority = 3014, enabled = true)
-			        @Description("Validating 'zcs' custom parameter of Daily details call ")
-			        public void Validate_DailyDetails_zcs_Custom_param() throws Exception {
-			        	System.out.println("==============================================");
-			        	System.out.println("****** Validating zcs custom parameter of Daily details call");
-			        	logStep("Validating zcs custom parameter of Daily details call ");
-			        	Utils.validate_custom_param_val_of_gampad_with_zip("Daily(10day)", "zcs", "30124");
-
-			        }
-
-			        /*
-			         * This method validates zcs custom parameter of Map details call
-			         */
-			        @Test(priority = 3016, enabled = true)
-			        @Description("Validating 'zcs' custom parameter of Map details call ")
-			        public void Validate_MapDetails_zcs_Custom_param() throws Exception {
-			        	System.out.println("==============================================");
-			        	System.out.println("****** Validating zcs custom parameter of Map details call");
-			        	logStep("Validating zcs custom parameter of Map details call ");
-			      Utils.validate_custom_param_val_of_gampad_with_zip("Map", "zcs", "30124");
-
-			        }
-
-			        /*
-			         * This method validates hzcs custom parameter of Hourly details call
-			         */
-			        @Test(priority = 3018, enabled = true)
-			        @Description("Validating 'hzcs' custom parameter of Hourly details call ")
-			        public void Validate_HourlyDetails_hzcs_Custom_param() throws Exception {
-			        	System.out.println("==============================================");
-			        	System.out.println("****** Validating hzcs custom parameter of Hourly details call");
-			        	logStep("Validating hzcs custom parameter of Hourly details call ");
-			        	Utils.validate_custom_param_val_of_gampad_with_zip("Hourly", "hzcs", "30124");
-
-			        }
-
-			        /*
-			         * This method validates hzcs custom parameter of Daily details call
-			         */
-			        @Test(priority = 3020, enabled = true)
-			        @Description("Validating 'hzcs' custom parameter of Daily details call ")
-			        public void Validate_DailyDetails_hzcs_Custom_param() throws Exception {
-			        	System.out.println("==============================================");
-			        	System.out.println("****** Validating hzcs custom parameter of Daily details call");
-			        	logStep("Validating hzcs custom parameter of Daily details call ");
-			        	Utils.validate_custom_param_val_of_gampad_with_zip("Daily(10day)", "hzcs", "30124");
-
-			        }
-
-			        /*
-			         * This method validates hzcs custom parameter of Map details call
-			         */
-			        @Test(priority = 3022, enabled = true)
-			        @Description("Validating 'hzcs' custom parameter of Map details call ")
-			        public void Validate_MapDetails_hzcs_Custom_param() throws Exception {
-			        	System.out.println("==============================================");
-			        	System.out.println("****** Validating hzcs custom parameter of Map details call");
-			        	logStep("Validating hzcs custom parameter of Map details call ");
-			        	Utils.validate_custom_param_val_of_gampad_with_zip("Map", "hzcs", "30124");
-
-			        }
-
-			        /*
-			         * This method validates nzcs custom parameter of Hourly details call
-			         */
-			        @Test(priority = 3024, enabled = true)
-			        @Description("Validating 'nzcs' custom parameter of Hourly details call ")
-			        public void Validate_HourlyDetails_nzcs_Custom_param() throws Exception {
-			        	System.out.println("==============================================");
-			        	System.out.println("****** Validating nzcs custom parameter of Hourly details call");
-			        	logStep("Validating nzcs custom parameter of Hourly details call ");
-			        	Utils.validate_custom_param_val_of_gampad_with_zip("Hourly", "nzcs", "30124");
-
-			        }
-
-			        /*
-			         * This method validates nzcs custom parameter of Daily details call
-			         */
-			        @Test(priority = 3026, enabled = true)
-			        @Description("Validating 'nzcs' custom parameter of Daily details call ")
-			        public void Validate_DailyDetails_nzcs_Custom_param() throws Exception {
-			        	System.out.println("==============================================");
-			        	System.out.println("****** Validating nzcs custom parameter of Daily details call");
-			        	logStep("Validating nzcs custom parameter of Daily details call ");
-			        	Utils.validate_custom_param_val_of_gampad_with_zip("Daily(10day)", "nzcs", "30124");
-
-			        }
-
-			        /*
-			         * This method validates nzcs custom parameter of Map details call
-			         */
-			        @Test(priority = 3028, enabled = true)
-			        @Description("Validating 'nzcs' custom parameter of Map details call ")
-			        public void Valida0te_MapDetails_nzcs_Custom_param() throws Exception {
-			        	System.out.println("==============================================");
-			        	System.out.println("****** Validating nzcs custom parameter of Map details call");
-			        	logStep("Validating nzcs custom parameter of Map details call ");
-			        	Utils.validate_custom_param_val_of_gampad_with_zip( "Map", "nzcs", "30124");
-			        		
-
-			        }
-			           
-			        
-			
-
-@Test(priority = 4000, enabled = true)
-	@Description("Verify Confiant SDK Calls")
-	public void Verify_Confiant_SDK_Calls() throws Exception {
-		System.out.println("==============================================");
-		System.out.println("****** Confiant SDK Calls Validation test started");
-		logStep("Confiant SDK Calls Validation test started");
-		
-		Utils.verifyConfiantSDKInitializationCalls("Smoke", "Confiant");
-	}
-
+			      
 	
 	
 	
